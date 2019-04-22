@@ -6,6 +6,7 @@
 package blackjack;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,9 +16,18 @@ public class Jugador {
    public String nombre;
     public ArrayList<Cartas> mano=new ArrayList<>();
     public int dinero;
-    public int puntos;
-    public int score;
+    public int puntos=0;
+    public int score=0;
     public int apuesta;
     public boolean pedirCarta=true;
+    public Juego game;
+    public Jugador(Juego game){
+        this.game=game;
+    }
+    public void setNombre(){
+        nombre=JOptionPane.showInputDialog("Ingrese su nombre");
+        
+        
+    }
     
 }

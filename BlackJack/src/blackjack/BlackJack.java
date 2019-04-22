@@ -18,7 +18,10 @@ public class BlackJack {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-     
+     Juego m1=new Juego();
+     m1.crearMazo();
+     m1.iniciarJuego();
+     m1.repartirCartas();
     }
     
 }
