@@ -29,6 +29,7 @@ public class Juego {
         for (int i = 0; i < 52; i++) {
             valor[i] = i + 1;
         }
+        //ordenamos el arreglo de forma desordenada y no hay repeticiones de numeros
 
         for (int i = 0; i < 52; i++) {
             res = rnd.nextInt(k);
@@ -37,6 +38,7 @@ public class Juego {
             k--;
 
         }
+        //asignamos el valor de un elemento del arreglo(1-52) que representa la carta que se creara
 
         for (int i = 0; i < 52; i++) {
             mazo[i] = new Cartas();
@@ -50,8 +52,8 @@ public class Juego {
     }
 
     public void repartirCartas() {
-        int pos = 3;
-        boolean bj = false;
+        int pos = 3; //Como siempre se reparten 4 cartas en el caso de nosotros ya que hay 2 jugadores, el contador del mazo arranca desde 3
+        boolean bj = false; //bool que indica si hay o no blackjack con las primeras dos cartas
         System.out.println("Repartiendo Cartas\n-----------------------");
         System.out.println("Jugador:");
 
@@ -63,6 +65,7 @@ public class Juego {
         }
         COM.mano.add(mazo[1]);
         COM.mano.add(mazo[3]);
+        //casos que se pueden dar con la reparticion de las primeras dos cartas. JUGADOR
 
         if (Player.puntos < 21) {
             System.out.println("PUNTAJE:" + Player.puntos);
@@ -91,13 +94,14 @@ public class Juego {
         }
 
         System.out.println("----------------------\nComputadora:");
+        //solo se contaran los puntos de la casa si es que el jugador no se ha pasado de 21 o si el jugador no hizo blackjack
         if (Player.puntos <= 21 && bj != true) {
 
             for (int i = 0; i < COM.mano.size(); i++) {
                 COM.mano.get(i).mostrarCarta();
                 COM.puntos = COM.puntos + COM.mano.get(i).valor;
                 try {
-                    //Ponemos a "Dormir" el programa durante los ms que queremos
+                    //Pausa para ir viendo las cartas que le tocan a la maquina con calma
                     Thread.sleep(1500);
                 } catch (Exception e) {
                     System.out.println(e);
