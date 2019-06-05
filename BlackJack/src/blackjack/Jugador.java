@@ -13,7 +13,9 @@ import javax.swing.JOptionPane;
  * @author Mega Tecnologia
  */
 public class Jugador {
+    public static ArrayList<Jugador> usuarios=new ArrayList();
    public String nombre;
+   public String pasword;
     public ArrayList<Cartas> mano=new ArrayList<>();
     public int dinero;
     public int puntos=0;
@@ -26,6 +28,8 @@ public class Jugador {
     }
     public void setNombre(){
         nombre=JOptionPane.showInputDialog("Ingrese su nombre");
+        pasword=JOptionPane.showInputDialog("Contraseña:");
+        
         
         
     }
