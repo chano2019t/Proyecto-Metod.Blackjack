@@ -25,7 +25,7 @@ public class Juego {
         int[] resultado = new int[52];
         Random rnd = new Random();
         int res;
-        //se rellena una matriz ordenada del 1 al 52(1..n)
+        //se rellena un arreglo ordenado del 1 al 52(1..n)
         for (int i = 0; i < 52; i++) {
             valor[i] = i + 1;
         }
@@ -33,6 +33,7 @@ public class Juego {
 
         for (int i = 0; i < 52; i++) {
             res = rnd.nextInt(k);
+            System.out.println(res);
             resultado[i] = valor[res];
             valor[res] = valor[k - 1];
             k--;
@@ -47,7 +48,7 @@ public class Juego {
     }
 
     public void iniciarJuego() {
-        Player.setNombre();
+//        Player.setNombre();
 
     }
 
@@ -77,12 +78,19 @@ public class Juego {
                 } else {
                     pos++;
                     Player.mano.add(mazo[pos]);
+                    
                     Player.mano.get(Player.mano.size() - 1).mostrarCarta();
+                    if(Player.mano.get(Player.mano.size() - 1).valor==11 && (Player.puntos+11)>21){
+                        Player.mano.get(Player.mano.size() - 1).valor=1;
+                    }
                     Player.puntos = Player.puntos + Player.mano.get(Player.mano.size() - 1).valor;
 
                     if (Player.puntos > 21) {
                         System.out.println("PUNTAJE:" + Player.puntos + "--->Se paso. Perdiste!");
                         Player.pedirCarta = false;
+                        Player.puntos=0;
+                        COM.puntos=1;
+                        
                     } else {
                         System.out.println("PUNTAJE:" + Player.puntos);
                     }
@@ -95,7 +103,7 @@ public class Juego {
 
         System.out.println("----------------------\nComputadora:");
         //solo se contaran los puntos de la casa si es que el jugador no se ha pasado de 21 o si el jugador no hizo blackjack
-        if (Player.puntos <= 21 && bj != true) {
+        if (Player.puntos !=0 && bj != true) {
 
             for (int i = 0; i < COM.mano.size(); i++) {
                 COM.mano.get(i).mostrarCarta();
@@ -129,6 +137,7 @@ public class Juego {
                     } else if (COM.puntos > 21) {
                         COM.pedirCarta = false;
                         System.out.println("PUNTAJE:" + COM.puntos + "--->La casa pierde");
+                        COM.puntos=0;
                     } else {
                         System.out.println("PUNTAJE:" + COM.puntos);
                     }
@@ -140,11 +149,9 @@ public class Juego {
                 System.out.println("PUNTAJE:" + COM.puntos + "--->La casa se queda.");
             }
 
-        } else {
-            Player.puntos = 0;
-            COM.puntos = 1;
         }
-        if (Player.puntos > COM.puntos) {
+        
+        if (Player.puntos > COM.puntos && Player.puntos<=21) {
             JOptionPane.showMessageDialog(null, "¡JUGADOR GANA!");
         } else if (Player.puntos < COM.puntos) {
             JOptionPane.showMessageDialog(null, "!LA CASA GANA!");
